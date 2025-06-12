@@ -15,7 +15,9 @@ npx cap sync
 
 * [`createChat()`](#createchat)
 * [`sendMessage(...)`](#sendmessage)
+* [`getReadiness()`](#getreadiness)
 * [`addListener('textFromAi', ...)`](#addlistenertextfromai-)
+* [`addListener('aiFinished', ...)`](#addlisteneraifinished-)
 * [Interfaces](#interfaces)
 
 </docgen-index>
@@ -47,6 +49,17 @@ sendMessage(options: { chatId: string; message: string; }) => Promise<void>
 --------------------
 
 
+### getReadiness()
+
+```typescript
+getReadiness() => Promise<{ readiness: string; }>
+```
+
+**Returns:** <code>Promise&lt;{ readiness: string; }&gt;</code>
+
+--------------------
+
+
 ### addListener('textFromAi', ...)
 
 ```typescript
@@ -63,6 +76,22 @@ addListener(eventName: 'textFromAi', listenerFunc: (event: TextFromAiEvent) => v
 --------------------
 
 
+### addListener('aiFinished', ...)
+
+```typescript
+addListener(eventName: 'aiFinished', listenerFunc: (event: AiFinishedEvent) => void) => Promise<{ remove: () => Promise<void>; }>
+```
+
+| Param              | Type                                                                            |
+| ------------------ | ------------------------------------------------------------------------------- |
+| **`eventName`**    | <code>'aiFinished'</code>                                                       |
+| **`listenerFunc`** | <code>(event: <a href="#aifinishedevent">AiFinishedEvent</a>) =&gt; void</code> |
+
+**Returns:** <code>Promise&lt;{ remove: () =&gt; Promise&lt;void&gt;; }&gt;</code>
+
+--------------------
+
+
 ### Interfaces
 
 
@@ -71,6 +100,13 @@ addListener(eventName: 'textFromAi', listenerFunc: (event: TextFromAiEvent) => v
 | Prop         | Type                |
 | ------------ | ------------------- |
 | **`text`**   | <code>string</code> |
+| **`chatId`** | <code>string</code> |
+
+
+#### AiFinishedEvent
+
+| Prop         | Type                |
+| ------------ | ------------------- |
 | **`chatId`** | <code>string</code> |
 
 </docgen-api>

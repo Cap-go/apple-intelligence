@@ -3,6 +3,11 @@
     <ion-header :translucent="true">
       <ion-toolbar>
         <ion-title>Apple AI Chatbot</ion-title>
+        <div slot="end" class="readiness-status">
+          <ion-chip :color="getReadinessColor()" outline>
+            <ion-label>{{ readinessStatus }}</ion-label>
+          </ion-chip>
+        </div>
       </ion-toolbar>
     </ion-header>
 
@@ -34,7 +39,8 @@
             <!-- Message bubble -->
             <div :class="['message-bubble', message.isUser ? 'user-bubble' : 'ai-bubble']">
               <ion-label>
-                <p>{{ message.text }}<span v-if="!message.isUser && !isTypingComplete(message)" class="typing-cursor">|</span></p>
+                <div class="message-content" v-html="message.text"></div>
+                <span v-if="!message.isUser && !isTypingComplete(message)" class="typing-cursor">|</span>
               </ion-label>
             </div>
           </div>
@@ -84,12 +90,13 @@ import {
   IonButton,
   IonIcon,
   IonFooter,
+  IonChip,
 } from '@ionic/vue';
 import { send } from 'ionicons/icons';
 import { ref, nextTick, onMounted, onUnmounted } from 'vue';
-import type { TextFromAiEvent } from '@capgo/apple-intelligence';
+import type { TextFromAiEvent, AiFinishedEvent } from '@capgo/apple-intelligence';
 import { AppleIntelligence } from '@capgo/apple-intelligence';
-
+import { marked } from 'marked';
 
 interface Message {
   id: number;
@@ -104,7 +111,9 @@ const sendIcon = send;
 const contentRef = ref();
 const chatId = ref<string>('');
 const currentAiMessageId = ref<number | null>(null);
+const readinessStatus = ref<string>('Checking...');
 let listenerRemove: (() => Promise<void>) | null = null;
+let readinessInterval: NodeJS.Timeout | null = null;
 
 const messages = ref<Message[]>([
   {
@@ -142,23 +151,71 @@ const isTypingComplete = (message: Message) => {
   return message.isComplete !== false;
 };
 
-const handleAiResponse = (event: TextFromAiEvent) => {
+const getReadinessColor = () => {
+  switch (readinessStatus.value) {
+    case 'ready':
+      return 'success';
+    case 'notReady':
+      return 'warning';
+    case 'notSupported':
+      return 'danger';
+    default:
+      return 'medium';
+  }
+};
+
+const checkReadiness = async () => {
+  try {
+    const result = await AppleIntelligence.getReadiness();
+    readinessStatus.value = result.readiness;
+  } catch (error) {
+    console.error('Error checking readiness:', error);
+    readinessStatus.value = 'Error';
+  }
+};
+
+const formatMessage = (text: string) => {
+  if (!text) return '';
+  
+  // Replace line break symbols with HTML line breaks
+  let formatted = text.replaceAll(/\n/g, '<br>');
+  
+  // Handle double line breaks for proper paragraph spacing
+  formatted = formatted.replaceAll(/<br><br>/g, '<br><br>');
+  
+  // Basic markdown formatting
+  // Bold text **text**
+  formatted = formatted.replaceAll(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
+  
+  // Lists with numbered items
+  formatted = formatted.replaceAll(/^(\d+\.\s)/gm, '<div class="list-item">$1');
+  formatted = formatted.replaceAll(/^(\s+\-\s)/gm, '<div class="list-subitem">• ');
+  
+  // Close div tags for list items
+  formatted = formatted.replaceAll(/(<div class="list-item">.*?)(?=<div class="list-item">|$)/gs, '$1</div>');
+  formatted = formatted.replaceAll(/(<div class="list-subitem">.*?)(?=<div class="list-|<div class="list-item">|$)/gs, '$1</div>');
+  
+  return formatted;
+};
+
+const handleAiResponse = async (event: TextFromAiEvent) => {
   if (event.chatId !== chatId.value) return;
   
   // Find the current AI message being streamed
   if (currentAiMessageId.value !== null) {
     const messageIndex = messages.value.findIndex(m => m.id === currentAiMessageId.value);
     if (messageIndex !== -1) {
-      // Update the message text with the streaming response
-      messages.value[messageIndex].text = event.text;
+      // For streaming: replace entire text (assuming event.text contains full accumulated text)
+      // If the AI sends chunks, you might need to accumulate: messages.value[messageIndex].text += event.text;
+      messages.value[messageIndex].text = await marked.parse(event.text);
       scrollToBottom();
       
       // If the response seems complete (you might need to adjust this logic based on how the AI signals completion)
       // For now, we'll consider it complete if it ends with punctuation
-      if (event.text.match(/[.!?]$/)) {
-        messages.value[messageIndex].isComplete = true;
-        currentAiMessageId.value = null;
-      }
+      // if (event.text.match(/[.!?]$/)) {
+      //   messages.value[messageIndex].isComplete = true;
+      //   currentAiMessageId.value = null;
+      // }
     }
   }
 };
@@ -213,15 +270,34 @@ const sendMessage = async () => {
   }
 };
 
+const handleAiFinished = (event: AiFinishedEvent) => {
+  if (event.chatId !== chatId.value) return;
+  const messageIndex = messages.value.findIndex(m => m.id === currentAiMessageId.value);
+  if (messageIndex !== -1) {
+    messages.value[messageIndex].isComplete = true;
+    currentAiMessageId.value = null;
+  }
+};
+
 onMounted(async () => {
   try {
+    // Check initial readiness
+    await checkReadiness();
+    
+    // Set up readiness checking interval (every 5 seconds)
+    readinessInterval = setInterval(checkReadiness, 5000);
+    
     // Create a new chat session
     const chat = await AppleIntelligence.createChat();
     chatId.value = chat.id;
     
     // Set up listener for AI responses
-    const listener = await AppleIntelligence.addListener('textFromAi', handleAiResponse);
-    listenerRemove = listener.remove;
+    const textFromAiListener = await AppleIntelligence.addListener('textFromAi', handleAiResponse);
+    const aiFinishedListener = await AppleIntelligence.addListener('aiFinished', handleAiFinished);
+    listenerRemove = async () => {
+      await textFromAiListener.remove();
+      await aiFinishedListener.remove();
+    };
     
     console.log('Apple Intelligence chat created:', chat.id);
   } catch (error) {
@@ -230,6 +306,11 @@ onMounted(async () => {
 });
 
 onUnmounted(async () => {
+  // Clean up readiness interval
+  if (readinessInterval) {
+    clearInterval(readinessInterval);
+  }
+  
   // Clean up listener when component is destroyed
   if (listenerRemove) {
     await listenerRemove();
@@ -240,6 +321,15 @@ onUnmounted(async () => {
 <style scoped>
 .chat-content {
   --padding-bottom: 0px;
+}
+
+.readiness-status {
+  margin-right: 8px;
+}
+
+.readiness-status ion-chip {
+  font-size: 12px;
+  height: 24px;
 }
 
 .message-item {
@@ -299,10 +389,24 @@ onUnmounted(async () => {
   margin-top: 4px;
 }
 
-.message-bubble ion-label p {
-  margin: 0;
+.message-content {
   font-size: 16px;
   line-height: 1.4;
+  margin: 0;
+}
+
+.message-content .list-item {
+  margin: 4px 0;
+  font-weight: 500;
+}
+
+.message-content .list-subitem {
+  margin: 2px 0 2px 16px;
+  font-size: 15px;
+}
+
+.message-content strong {
+  font-weight: 600;
 }
 
 .typing-cursor {

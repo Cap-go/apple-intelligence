@@ -15,7 +15,8 @@ public class AppleIntelligencePlugin: CAPPlugin, CAPBridgedPlugin {
     public let jsName = "AppleIntelligence"
     public var pluginMethods: [CAPPluginMethod] = [
         CAPPluginMethod(name: "createChat", returnType: CAPPluginReturnPromise),
-        CAPPluginMethod(name: "sendMessage", returnType: CAPPluginReturnPromise)
+        CAPPluginMethod(name: "sendMessage", returnType: CAPPluginReturnPromise),
+        CAPPluginMethod(name: "getReadiness", returnType: CAPPluginReturnPromise),
     ]
     private var model = SystemLanguageModel.default
     
@@ -28,6 +29,26 @@ public class AppleIntelligencePlugin: CAPPlugin, CAPBridgedPlugin {
         call.resolve([
             "id": id.uuidString
         ])
+    }
+    
+    @objc func getReadiness(_ call: CAPPluginCall) {
+        switch model.availability {
+            case .available:
+                call.resolve(["readiness": "ready"])
+                return
+            case .unavailable(.deviceNotEligible):
+                call.resolve(["readiness": "Device is not eligible for Apple Intelligence"])
+                return
+            case .unavailable(.appleIntelligenceNotEnabled):
+                call.resolve(["readiness": "Apple Intelligence is not enabled"])
+                return
+            case .unavailable(.modelNotReady):
+                call.resolve(["readiness": "Model is not ready"])
+                return
+            case .unavailable(let other):
+                call.reject("error \(other) error")
+                return
+        }
     }
     
     @objc func sendMessage(_ call: CAPPluginCall) {
@@ -56,14 +77,17 @@ public class AppleIntelligencePlugin: CAPPlugin, CAPBridgedPlugin {
             call.reject("message not found")
             return
         }
+        if (chat.isResponding) {
+            call.reject("chat is respnding, please wait before asking new questions")
+            return
+        }
         Task {
             do {
                 let stream = chat.streamResponse(to: message)
                 for try await chunk in stream {
-                    finalResponse += chunk
                     self.notifyListeners("textFromAi", data: ["chatId": chatId, "text": chunk])
                 }
-                
+                self.notifyListeners("aiFinished", data: ["chatId": chatId])
             } catch {
                 call.reject("Failed to get response: \(error.localizedDescription)")
             }

@@ -58,13 +58,12 @@ public class AppleIntelligencePlugin: CAPPlugin, CAPBridgedPlugin {
         }
         Task {
             do {
-                var finalResponse = ""
                 let stream = chat.streamResponse(to: message)
                 for try await chunk in stream {
-                    print(chunk)
                     finalResponse += chunk
+                    self.notifyListeners("textFromAi", data: ["chatId": chatId, "text": chunk])
                 }
-                self.notifyListeners("textFromAi", data: ["chatId": chatId, "text": finalResponse])
+                
             } catch {
                 call.reject("Failed to get response: \(error.localizedDescription)")
             }

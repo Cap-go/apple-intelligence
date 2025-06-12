@@ -28,10 +28,10 @@ npx cap sync
 ### createChat()
 
 ```typescript
-createChat() => Promise<{ id: string; }>
+createChat() => Promise<{ id: string; instructions?: string; }>
 ```
 
-**Returns:** <code>Promise&lt;{ id: string; }&gt;</code>
+**Returns:** <code>Promise&lt;{ id: string; instructions?: string; }&gt;</code>
 
 --------------------
 

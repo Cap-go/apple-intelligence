@@ -3,6 +3,9 @@ import { WebPlugin } from '@capacitor/core';
 import type { AppleIntelligencePlugin } from './definitions';
 
 export class AppleIntelligenceWeb extends WebPlugin implements AppleIntelligencePlugin {
+  getReadiness(): Promise<{ readiness: string; }> {
+    throw new Error('Method not implemented.');
+  }
   createChat(): Promise<{ id: string; }> {
     throw new Error('Method not implemented.');
   }

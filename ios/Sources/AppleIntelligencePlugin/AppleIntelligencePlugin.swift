@@ -33,7 +33,8 @@ public class AppleIntelligencePlugin: CAPPlugin, CAPBridgedPlugin {
     @objc func createChat(_ call: CAPPluginCall) {
         #if canImport(FoundationModels)
         if #available(iOS 26.0, *) {
-            let session = LanguageModelSession()
+            let instructions = call.getString("instructions")
+            let session = LanguageModelSession(instructions: instructions)
             let id = UUID()
             chats[id.uuidString] = session
             call.resolve([

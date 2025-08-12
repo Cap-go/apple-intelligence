@@ -76,8 +76,5 @@
     "android": {
       "src": "android"
     }
-  },
-  "dependencies": {
-    "eslint-plugin-vue": "^10.4.0"
   }
 }

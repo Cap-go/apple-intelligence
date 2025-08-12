@@ -1,6 +1,6 @@
 export interface AppleIntelligencePlugin {
-  createChat(): Promise<{ id: string, instructions?: string }>;
-  sendMessage(options: { chatId: string, message: string }): Promise<void>;
+  createChat(): Promise<{ id: string; instructions?: string }>;
+  sendMessage(options: { chatId: string; message: string }): Promise<void>;
   getReadiness(): Promise<{ readiness: string }>;
   addListener(
     eventName: 'textFromAi',

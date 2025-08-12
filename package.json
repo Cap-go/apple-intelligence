@@ -1,6 +1,6 @@
 {
   "name": "@capgo/apple-intelligence",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "description": "Adds support for Apple Intelligence for Capacitor",
   "main": "dist/plugin.cjs.js",
   "module": "dist/esm/index.js",

@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [0.0.6](https://github.com/Cap-go/apple-intelligence/compare/0.0.5...0.0.6) (2025-08-12)
+
+
+### Bug Fixes
+
+* lint ([cd11460](https://github.com/Cap-go/apple-intelligence/commit/cd114603982eb501c6c97322f55527058acbdea4))
+
 ## [0.0.5](https://github.com/Cap-go/apple-intelligence/compare/0.0.4...0.0.5) (2025-08-12)
 
 ## [0.0.4](https://github.com/Cap-go/apple-intelligence/compare/0.0.3...0.0.4) (2025-08-12)

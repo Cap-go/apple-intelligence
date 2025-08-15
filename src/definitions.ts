@@ -42,6 +42,15 @@ export interface LLMPlugin {
     eventName: 'aiFinished',
     listenerFunc: (event: AiFinishedEvent) => void,
   ): Promise<{ remove: () => Promise<void> }>;
+  
+  /**
+   * Sets the model path for custom models
+   * - iOS: Path to a GGUF model file (in bundle or absolute path)
+   * - Android: Path to a MediaPipe model file (in assets or files directory)
+   * @param options - The model path configuration
+   * @returns Promise that resolves when model is loaded
+   */
+  setModelPath(options: { path: string }): Promise<void>;
 }
 
 /**

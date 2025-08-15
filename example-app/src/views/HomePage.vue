@@ -94,8 +94,8 @@ import {
 } from '@ionic/vue';
 import { send } from 'ionicons/icons';
 import { ref, nextTick, onMounted, onUnmounted } from 'vue';
-import type { TextFromAiEvent, AiFinishedEvent } from '@capgo/apple-intelligence';
-import { AppleIntelligence } from '@capgo/apple-intelligence';
+import type { TextFromAiEvent, AiFinishedEvent } from '@capgo/llm';
+import { CapgoLLM } from '@capgo/llm';
 import { marked } from 'marked';
 
 interface Message {
@@ -166,7 +166,7 @@ const getReadinessColor = () => {
 
 const checkReadiness = async () => {
   try {
-    const result = await AppleIntelligence.getReadiness();
+    const result = await CapgoLLM.getReadiness();
     readinessStatus.value = result.readiness;
   } catch (error) {
     console.error('Error checking readiness:', error);
@@ -253,7 +253,7 @@ const sendMessage = async () => {
     
     try {
       // Send message to AI
-      await AppleIntelligence.sendMessage({
+      await CapgoLLM.sendMessage({
         chatId: chatId.value,
         message: messageText
       });
@@ -288,12 +288,12 @@ onMounted(async () => {
     readinessInterval = setInterval(checkReadiness, 5000);
     
     // Create a new chat session
-    const chat = await AppleIntelligence.createChat();
+    const chat = await CapgoLLM.createChat();
     chatId.value = chat.id;
     
     // Set up listener for AI responses
-    const textFromAiListener = await AppleIntelligence.addListener('textFromAi', handleAiResponse);
-    const aiFinishedListener = await AppleIntelligence.addListener('aiFinished', handleAiFinished);
+    const textFromAiListener = await CapgoLLM.addListener('textFromAi', handleAiResponse);
+    const aiFinishedListener = await CapgoLLM.addListener('aiFinished', handleAiFinished);
     listenerRemove = async () => {
       await textFromAiListener.remove();
       await aiFinishedListener.remove();

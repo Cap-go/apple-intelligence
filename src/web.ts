@@ -2,7 +2,7 @@ import { WebPlugin } from '@capacitor/core';
 
 import type { LLMPlugin } from './definitions';
 
-export class AppleIntelligenceWeb extends WebPlugin implements LLMPlugin {
+export class CapgoLLMWeb extends WebPlugin implements LLMPlugin {
   getReadiness(): Promise<{ readiness: string }> {
     throw new Error('Method not implemented.');
   }
@@ -12,7 +12,7 @@ export class AppleIntelligenceWeb extends WebPlugin implements LLMPlugin {
   sendMessage(_options: { chatId: string; message: string }): Promise<void> {
     throw new Error('Method not implemented.');
   }
-  async echo(_options: { value: string }): Promise<{ value: string }> {
+  setModelPath(_options: { path: string }): Promise<void> {
     throw new Error('Method not implemented.');
   }
 }

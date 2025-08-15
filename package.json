@@ -1,7 +1,7 @@
 {
-  "name": "@capgo/apple-intelligence",
+  "name": "@capgo/llm",
   "version": "0.0.10",
-  "description": "Adds support for Apple Intelligence for Capacitor",
+  "description": "Adds support for LLM locally runned for Capacitor",
   "main": "dist/plugin.cjs.js",
   "module": "dist/esm/index.js",
   "types": "dist/esm/index.d.ts",
@@ -13,16 +13,16 @@
     "ios/Sources",
     "ios/Tests",
     "Package.swift",
-    "CapgoAppleIntelligence.podspec"
+    "CapgoLLM.podspec"
   ],
   "author": "WcaleNieWolny <michael@capgo.app>",
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Cap-go/apple-intelligence.git"
+    "url": "git+https://github.com/Cap-go/llm.git"
   },
   "bugs": {
-    "url": "https://github.com/Cap-go/apple-intelligence/issues"
+    "url": "https://github.com/Cap-go/llm/issues"
   },
   "keywords": [
     "capacitor",
@@ -31,7 +31,7 @@
   ],
   "scripts": {
     "verify": "npm run verify:ios && npm run verify:android && npm run verify:web",
-    "verify:ios": "xcodebuild -scheme CapgoAppleIntelligence -destination generic/platform=iOS",
+    "verify:ios": "xcodebuild -scheme CapgoLLM -destination generic/platform=iOS",
     "verify:android": "cd android && ./gradlew clean build test && cd ..",
     "verify:web": "npm run build",
     "lint": "npm run eslint && npm run prettier -- --check && npm run swiftlint -- lint",
@@ -39,7 +39,7 @@
     "eslint": "eslint . --ext ts",
     "prettier": "prettier \"**/*.{css,html,ts,js,java}\" --plugin=prettier-plugin-java",
     "swiftlint": "node-swiftlint",
-    "docgen": "docgen --api AppleIntelligencePlugin --output-readme README.md --output-json dist/docs.json",
+    "docgen": "docgen --api LLMPlugin --output-readme README.md --output-json dist/docs.json",
     "build": "npm run clean && npm run docgen && tsc && rollup -c rollup.config.mjs",
     "clean": "rimraf ./dist",
     "watch": "tsc --watch",

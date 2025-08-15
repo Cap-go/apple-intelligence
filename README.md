@@ -1,4 +1,4 @@
-# @capgo/apple-intelligence
+# @capgo/llm
 
 <a href="https://capgo.app/"><img src='https://raw.githubusercontent.com/Cap-go/capgo/main/assets/capgo_banner.png' alt='Capgo - Instant updates for capacitor'/></a>
 
@@ -7,7 +7,9 @@
   <h2><a href="https://capgo.app/consulting/?ref=plugin"> Fix your annoying bug now, Hire a Capacitor expert 💪</a></h2>
 </div>
 
-Adds support for Apple Intelligence for Capacitor
+Adds support for LLM locally runned for Capacitor
+
+It use AppleInteligence in IOS and tasks-genai in Android
 
 ## Installation
 
@@ -32,11 +34,15 @@ npx cap sync
 <docgen-api>
 <!--Update the source file JSDoc comments and rerun docgen to update the docs below-->
 
+LLM Plugin interface for interacting with on-device language models
+
 ### createChat()
 
 ```typescript
 createChat() => Promise<{ id: string; instructions?: string; }>
 ```
+
+Creates a new chat session
 
 **Returns:** <code>Promise&lt;{ id: string; instructions?: string; }&gt;</code>
 
@@ -49,9 +55,11 @@ createChat() => Promise<{ id: string; instructions?: string; }>
 sendMessage(options: { chatId: string; message: string; }) => Promise<void>
 ```
 
-| Param         | Type                                              |
-| ------------- | ------------------------------------------------- |
-| **`options`** | <code>{ chatId: string; message: string; }</code> |
+Sends a message to the AI in a specific chat session
+
+| Param         | Type                                              | Description                       |
+| ------------- | ------------------------------------------------- | --------------------------------- |
+| **`options`** | <code>{ chatId: string; message: string; }</code> | - The chat id and message to send |
 
 --------------------
 
@@ -61,6 +69,8 @@ sendMessage(options: { chatId: string; message: string; }) => Promise<void>
 ```typescript
 getReadiness() => Promise<{ readiness: string; }>
 ```
+
+Gets the readiness status of the LLM
 
 **Returns:** <code>Promise&lt;{ readiness: string; }&gt;</code>
 
@@ -73,10 +83,12 @@ getReadiness() => Promise<{ readiness: string; }>
 addListener(eventName: 'textFromAi', listenerFunc: (event: TextFromAiEvent) => void) => Promise<{ remove: () => Promise<void>; }>
 ```
 
-| Param              | Type                                                                            |
-| ------------------ | ------------------------------------------------------------------------------- |
-| **`eventName`**    | <code>'textFromAi'</code>                                                       |
-| **`listenerFunc`** | <code>(event: <a href="#textfromaievent">TextFromAiEvent</a>) =&gt; void</code> |
+Adds a listener for text received from AI
+
+| Param              | Type                                                                            | Description                         |
+| ------------------ | ------------------------------------------------------------------------------- | ----------------------------------- |
+| **`eventName`**    | <code>'textFromAi'</code>                                                       | - Event name 'textFromAi'           |
+| **`listenerFunc`** | <code>(event: <a href="#textfromaievent">TextFromAiEvent</a>) =&gt; void</code> | - Callback function for text events |
 
 **Returns:** <code>Promise&lt;{ remove: () =&gt; Promise&lt;void&gt;; }&gt;</code>
 
@@ -89,10 +101,12 @@ addListener(eventName: 'textFromAi', listenerFunc: (event: TextFromAiEvent) => v
 addListener(eventName: 'aiFinished', listenerFunc: (event: AiFinishedEvent) => void) => Promise<{ remove: () => Promise<void>; }>
 ```
 
-| Param              | Type                                                                            |
-| ------------------ | ------------------------------------------------------------------------------- |
-| **`eventName`**    | <code>'aiFinished'</code>                                                       |
-| **`listenerFunc`** | <code>(event: <a href="#aifinishedevent">AiFinishedEvent</a>) =&gt; void</code> |
+Adds a listener for AI completion events
+
+| Param              | Type                                                                            | Description                           |
+| ------------------ | ------------------------------------------------------------------------------- | ------------------------------------- |
+| **`eventName`**    | <code>'aiFinished'</code>                                                       | - Event name 'aiFinished'             |
+| **`listenerFunc`** | <code>(event: <a href="#aifinishedevent">AiFinishedEvent</a>) =&gt; void</code> | - Callback function for finish events |
 
 **Returns:** <code>Promise&lt;{ remove: () =&gt; Promise&lt;void&gt;; }&gt;</code>
 
@@ -104,16 +118,20 @@ addListener(eventName: 'aiFinished', listenerFunc: (event: AiFinishedEvent) => v
 
 #### TextFromAiEvent
 
-| Prop         | Type                |
-| ------------ | ------------------- |
-| **`text`**   | <code>string</code> |
-| **`chatId`** | <code>string</code> |
+Event data for text received from AI
+
+| Prop         | Type                | Description              |
+| ------------ | ------------------- | ------------------------ |
+| **`text`**   | <code>string</code> | The text content from AI |
+| **`chatId`** | <code>string</code> | The chat session ID      |
 
 
 #### AiFinishedEvent
 
-| Prop         | Type                |
-| ------------ | ------------------- |
-| **`chatId`** | <code>string</code> |
+Event data for AI completion
+
+| Prop         | Type                | Description                       |
+| ------------ | ------------------- | --------------------------------- |
+| **`chatId`** | <code>string</code> | The chat session ID that finished |
 
 </docgen-api>

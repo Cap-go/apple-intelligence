@@ -8,9 +8,9 @@ import FoundationModels
  * here: https://capacitorjs.com/docs/plugins/ios
  */
 
-@objc(AppleIntelligencePlugin)
-public class AppleIntelligencePlugin: CAPPlugin, CAPBridgedPlugin {
-    public let identifier = "AppleIntelligencePlugin"
+@objc(LLMPlugin)
+public class LLMPlugin: CAPPlugin, CAPBridgedPlugin {
+    public let identifier = "LLMPlugin"
     public let jsName = "AppleIntelligence"
     public var pluginMethods: [CAPPluginMethod] = [
         CAPPluginMethod(name: "createChat", returnType: CAPPluginReturnPromise),

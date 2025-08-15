@@ -1,8 +1,8 @@
 import { WebPlugin } from '@capacitor/core';
 
-import type { AppleIntelligencePlugin } from './definitions';
+import type { LLMPlugin } from './definitions';
 
-export class AppleIntelligenceWeb extends WebPlugin implements AppleIntelligencePlugin {
+export class AppleIntelligenceWeb extends WebPlugin implements LLMPlugin {
   getReadiness(): Promise<{ readiness: string }> {
     throw new Error('Method not implemented.');
   }

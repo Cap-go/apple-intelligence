@@ -2,27 +2,27 @@
 import PackageDescription
 
 let package = Package(
-    name: "CapgoAppleIntelligence",
+    name: "CapgoLLM",
     platforms: [.iOS(.v14)],
     products: [
         .library(
-            name: "CapgoAppleIntelligence",
-            targets: ["AppleIntelligencePlugin"])
+            name: "CapgoLLM",
+            targets: ["LLMPlugin"])
     ],
     dependencies: [
         .package(url: "https://github.com/ionic-team/capacitor-swift-pm.git", from: "7.0.0")
     ],
     targets: [
         .target(
-            name: "AppleIntelligencePlugin",
+            name: "LLMPlugin",
             dependencies: [
                 .product(name: "Capacitor", package: "capacitor-swift-pm"),
                 .product(name: "Cordova", package: "capacitor-swift-pm")
             ],
-            path: "ios/Sources/AppleIntelligencePlugin"),
+            path: "ios/Sources/LLMPlugin"),
         .testTarget(
-            name: "AppleIntelligencePluginTests",
-            dependencies: ["AppleIntelligencePlugin"],
-            path: "ios/Tests/AppleIntelligencePluginTests")
+            name: "LLMPluginTests",
+            dependencies: ["LLMPlugin"],
+            path: "ios/Tests/LLMPluginTests")
     ]
 )

@@ -1,8 +1,8 @@
 import { registerPlugin } from '@capacitor/core';
 
-import type { AppleIntelligencePlugin } from './definitions';
+import type { LLMPlugin } from './definitions';
 
-const AppleIntelligence = registerPlugin<AppleIntelligencePlugin>('AppleIntelligence', {
+const AppleIntelligence = registerPlugin<LLMPlugin>('AppleIntelligence', {
   web: () => import('./web').then((m) => new m.AppleIntelligenceWeb()),
 });
 

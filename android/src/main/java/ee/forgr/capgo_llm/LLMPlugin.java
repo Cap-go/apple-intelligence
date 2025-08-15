@@ -1,4 +1,4 @@
-package ee.forgr.apple_intelligence;
+package ee.forgr.capgo_llm;
 
 import com.getcapacitor.JSObject;
 import com.getcapacitor.Plugin;
@@ -6,17 +6,15 @@ import com.getcapacitor.PluginCall;
 import com.getcapacitor.PluginMethod;
 import com.getcapacitor.annotation.CapacitorPlugin;
 
-@CapacitorPlugin(name = "AppleIntelligence")
-public class AppleIntelligencePlugin extends Plugin {
-
-    private AppleIntelligence implementation = new AppleIntelligence();
+@CapacitorPlugin(name = "LLMPlugin")
+public class LLMPlugin extends Plugin {
 
     @PluginMethod
     public void echo(PluginCall call) {
         String value = call.getString("value");
 
         JSObject ret = new JSObject();
-        ret.put("value", implementation.echo(value));
+        ret.put("value", value);
         call.resolve(ret);
     }
 }

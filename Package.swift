@@ -10,16 +10,18 @@ let package = Package(
             targets: ["LLMPlugin"])
     ],
     dependencies: [
-        .package(url: "https://github.com/ionic-team/capacitor-swift-pm.git", from: "7.0.0"),
-        .package(url: "https://github.com/eastriverlee/LLM.swift", from: "2.0.1")
+        .package(url: "https://github.com/ionic-team/capacitor-swift-pm.git", from: "7.0.0")
+        // Note: SwiftTasksVision is for MediaPipe Vision, not GenAI
+        // We would need a similar package for MediaPipeTasksGenAI
+        // Keeping this as a placeholder for when GenAI SPM support is available
+        // .package(url: "https://github.com/paescebu/SwiftTasksVision.git", from: "0.10.21")
     ],
     targets: [
         .target(
             name: "LLMPlugin",
             dependencies: [
                 .product(name: "Capacitor", package: "capacitor-swift-pm"),
-                .product(name: "Cordova", package: "capacitor-swift-pm"),
-                .product(name: "LLM", package: "LLM.swift")
+                .product(name: "Cordova", package: "capacitor-swift-pm")
             ],
             path: "ios/Sources/LLMPlugin"),
         .testTarget(

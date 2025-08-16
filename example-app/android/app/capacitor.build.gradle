@@ -13,7 +13,7 @@ dependencies {
     implementation project(':capacitor-haptics')
     implementation project(':capacitor-keyboard')
     implementation project(':capacitor-status-bar')
-    implementation project(':capgo-llm')
+    implementation project(':capgo-capacitor-llm')
 
 }
 

@@ -14,6 +14,9 @@
 		504EC30F1FED79650016851F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 504EC30E1FED79650016851F /* Assets.xcassets */; };
 		504EC3121FED79650016851F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 504EC3101FED79650016851F /* LaunchScreen.storyboard */; };
 		50B271D11FEDC1A000F3C39B /* public in Resources */ = {isa = PBXBuildFile; fileRef = 50B271D01FEDC1A000F3C39B /* public */; };
+		863D2E9F2E50159B00B9203D /* Gemma2-2B-IT_multi-prefill-seq_q8_ekv1280.task in Resources */ = {isa = PBXBuildFile; fileRef = 863D2E9D2E50159B00B9203D /* Gemma2-2B-IT_multi-prefill-seq_q8_ekv1280.task */; };
+		863D2EA22E50183B00B9203D /* Gemma2-2B-IT_multi-prefill-seq_q8_ekv1280.tflite in Resources */ = {isa = PBXBuildFile; fileRef = 863D2EA12E50183B00B9203D /* Gemma2-2B-IT_multi-prefill-seq_q8_ekv1280.tflite */; };
+		863D2EA42E502B2800B9203D /* gemma-3-270m-it-qat-Q4_0.gguf in Resources */ = {isa = PBXBuildFile; fileRef = 863D2EA32E502B2800B9203D /* gemma-3-270m-it-qat-Q4_0.gguf */; };
 		A084ECDBA7D38E1E42DFC39D /* Pods_App.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AF277DCFFFF123FFC6DF26C7 /* Pods_App.framework */; };
 /* End PBXBuildFile section */
 
@@ -27,6 +30,9 @@
 		504EC3111FED79650016851F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		504EC3131FED79650016851F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		50B271D01FEDC1A000F3C39B /* public */ = {isa = PBXFileReference; lastKnownFileType = folder; path = public; sourceTree = "<group>"; };
+		863D2E9D2E50159B00B9203D /* Gemma2-2B-IT_multi-prefill-seq_q8_ekv1280.task */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Gemma2-2B-IT_multi-prefill-seq_q8_ekv1280.task"; sourceTree = "<group>"; };
+		863D2EA12E50183B00B9203D /* Gemma2-2B-IT_multi-prefill-seq_q8_ekv1280.tflite */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Gemma2-2B-IT_multi-prefill-seq_q8_ekv1280.tflite"; sourceTree = "<group>"; };
+		863D2EA32E502B2800B9203D /* gemma-3-270m-it-qat-Q4_0.gguf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "gemma-3-270m-it-qat-Q4_0.gguf"; sourceTree = "<group>"; };
 		AF277DCFFFF123FFC6DF26C7 /* Pods_App.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_App.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		AF51FD2D460BCFE21FA515B2 /* Pods-App.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-App.release.xcconfig"; path = "Pods/Target Support Files/Pods-App/Pods-App.release.xcconfig"; sourceTree = "<group>"; };
 		FC68EB0AF532CFC21C3344DD /* Pods-App.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-App.debug.xcconfig"; path = "Pods/Target Support Files/Pods-App/Pods-App.debug.xcconfig"; sourceTree = "<group>"; };
@@ -77,6 +83,9 @@
 				504EC3071FED79650016851F /* AppDelegate.swift */,
 				504EC30B1FED79650016851F /* Main.storyboard */,
 				504EC30E1FED79650016851F /* Assets.xcassets */,
+				863D2EA32E502B2800B9203D /* gemma-3-270m-it-qat-Q4_0.gguf */,
+				863D2EA12E50183B00B9203D /* Gemma2-2B-IT_multi-prefill-seq_q8_ekv1280.tflite */,
+				863D2E9D2E50159B00B9203D /* Gemma2-2B-IT_multi-prefill-seq_q8_ekv1280.task */,
 				504EC3101FED79650016851F /* LaunchScreen.storyboard */,
 				504EC3131FED79650016851F /* Info.plist */,
 				2FAD9762203C412B000D30F8 /* config.xml */,
@@ -105,7 +114,7 @@
 				504EC3001FED79650016851F /* Sources */,
 				504EC3011FED79650016851F /* Frameworks */,
 				504EC3021FED79650016851F /* Resources */,
-				9592DBEFFC6D2A0C8D5DEB22 /* [CP] Embed Pods Frameworks */,
+				05344004E3625E008E545103 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -141,8 +150,6 @@
 				Base,
 			);
 			mainGroup = 504EC2FB1FED79650016851F;
-			packageReferences = (
-			);
 			productRefGroup = 504EC3051FED79650016851F /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -159,8 +166,11 @@
 			files = (
 				504EC3121FED79650016851F /* LaunchScreen.storyboard in Resources */,
 				50B271D11FEDC1A000F3C39B /* public in Resources */,
+				863D2E9F2E50159B00B9203D /* Gemma2-2B-IT_multi-prefill-seq_q8_ekv1280.task in Resources */,
 				504EC30F1FED79650016851F /* Assets.xcassets in Resources */,
 				50379B232058CBB4000EE86E /* capacitor.config.json in Resources */,
+				863D2EA42E502B2800B9203D /* gemma-3-270m-it-qat-Q4_0.gguf in Resources */,
+				863D2EA22E50183B00B9203D /* Gemma2-2B-IT_multi-prefill-seq_q8_ekv1280.tflite in Resources */,
 				504EC30D1FED79650016851F /* Main.storyboard in Resources */,
 				2FAD9763203C412B000D30F8 /* config.xml in Resources */,
 			);
@@ -169,6 +179,21 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		05344004E3625E008E545103 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-App/Pods-App-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		6634F4EFEBD30273BCE97C65 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -185,21 +210,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		9592DBEFFC6D2A0C8D5DEB22 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-App/Pods-App-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */

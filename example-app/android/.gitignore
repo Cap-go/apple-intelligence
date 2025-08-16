@@ -89,6 +89,12 @@ lint/tmp/
 # Android Profiling
 *.hprof
 
+# Model files
+*.task
+*.litertlm
+*.bin
+*.gguf
+
 # Cordova plugins for Capacitor
 capacitor-cordova-android-plugins
 

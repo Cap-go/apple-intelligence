@@ -14,5 +14,5 @@ project(':capacitor-keyboard').projectDir = new File('../node_modules/@capacitor
 include ':capacitor-status-bar'
 project(':capacitor-status-bar').projectDir = new File('../node_modules/@capacitor/status-bar/android')
 
-include ':capgo-llm'
-project(':capgo-llm').projectDir = new File('../../android')
+include ':capgo-capacitor-llm'
+project(':capgo-capacitor-llm').projectDir = new File('../../android')

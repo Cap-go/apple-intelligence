@@ -1,5 +1,5 @@
 {
-  "name": "@capgo/llm",
+  "name": "@capgo/capacitor-llm",
   "version": "7.0.0",
   "description": "Adds support for LLM locally runned for Capacitor",
   "main": "dist/plugin.cjs.js",
@@ -53,7 +53,9 @@
     "@ionic/eslint-config": "^0.4.0",
     "@ionic/prettier-config": "^4.0.0",
     "@ionic/swiftlint-config": "^2.0.0",
+    "@webgpu/types": "^0.1.64",
     "eslint": "^8.57.0",
+    "google-protobuf": "^3.21.4",
     "prettier": "^3.4.2",
     "prettier-plugin-java": "^2.6.6",
     "rimraf": "^6.0.1",
@@ -76,5 +78,8 @@
     "android": {
       "src": "android"
     }
+  },
+  "dependencies": {
+    "@mediapipe/tasks-genai": "^0.10.24"
   }
 }

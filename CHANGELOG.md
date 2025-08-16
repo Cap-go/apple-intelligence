@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [7.1.0](https://github.com/Cap-go/llm/compare/0.0.10...7.1.0) (2025-08-16)
+
+
+### Features
+
+* add CapgoLLM plugin with support for custom models, update dependencies, and enhance documentation ([c340e00](https://github.com/Cap-go/llm/commit/c340e002f7338b2136240b8885d4ea7c366fd89c))
+* update CapgoLLM plugin with new model handling, add download functionality, and enhance documentation ([ffc330c](https://github.com/Cap-go/llm/commit/ffc330c4948e6841e75aa888a02be11cfb0f1541))
+
 ## [0.0.10](https://github.com/Cap-go/apple-intelligence/compare/0.0.9...0.0.10) (2025-08-12)
 
 ## [0.0.9](https://github.com/Cap-go/apple-intelligence/compare/0.0.8...0.0.9) (2025-08-12)

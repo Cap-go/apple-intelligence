@@ -72,7 +72,8 @@
     "typescript": "~4.1.5"
   },
   "peerDependencies": {
-    "@capacitor/core": ">=7.0.0"
+    "@capacitor/core": ">=7.0.0",
+    "@mediapipe/tasks-genai": "^0.10.24"
   },
   "prettier": "@ionic/prettier-config",
   "swiftlint": "@ionic/swiftlint-config",
@@ -88,6 +89,5 @@
     }
   },
   "dependencies": {
-    "@mediapipe/tasks-genai": "^0.10.24"
   }
 }

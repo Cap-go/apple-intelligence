@@ -4,9 +4,10 @@ export default {
     {
       file: 'dist/plugin.js',
       format: 'iife',
-      name: 'capacitorAppleIntelligence',
+      name: 'capacitorLLM',
       globals: {
         '@capacitor/core': 'capacitorExports',
+        '@mediapipe/tasks-genai': 'MediaPipeTasksGenAI',
       },
       sourcemap: true,
       inlineDynamicImports: true,
@@ -18,5 +19,6 @@ export default {
       inlineDynamicImports: true,
     },
   ],
-  external: ['@capacitor/core'],
+  external: ['@capacitor/core', '@mediapipe/tasks-genai'],
+  context: 'globalThis',
 };

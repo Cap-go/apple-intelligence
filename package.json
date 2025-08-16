@@ -27,7 +27,15 @@
   "keywords": [
     "capacitor",
     "plugin",
-    "native"
+    "native",
+    "llm",
+    "local",
+    "gemma",
+    "gemma3",
+    "gemma3-270m",
+    "gemma2-2b",
+    "apple-intelligence",
+    "gpt"
   ],
   "scripts": {
     "verify": "npm run verify:ios && npm run verify:android && npm run verify:web",
